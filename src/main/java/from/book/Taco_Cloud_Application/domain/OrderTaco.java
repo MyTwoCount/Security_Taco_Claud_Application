@@ -43,6 +43,7 @@ public class OrderTaco {
         this.placeAt = new Date();
     }
 
+    @OneToMany(targetEntity = Taco.class)
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTacoToOrder(Taco taco){

@@ -21,6 +21,7 @@ public class Taco {
     @Min(value = 5,message = "Name for your taco must have at least five characters")
     private String tacoName;
 
+    @ManyToMany(targetEntity = Ingredient.class)
     private List<Ingredient> ingredientList = new ArrayList<>();
 
     private Date createdAt;

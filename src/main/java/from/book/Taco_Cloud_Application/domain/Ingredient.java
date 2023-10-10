@@ -1,11 +1,14 @@
 package from.book.Taco_Cloud_Application.domain;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
 @Entity
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
 public class Ingredient {
 
     @Id
