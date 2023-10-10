@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Design Template Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/ctyles.css}"/>
+</head>
+<body>
+
+    <img th:src="@{/images/TacoCloud.png}" alt="brak obrazka taco"/>
+    <h1>Design your own taco</h1>
+
+    <form method="post" th:action="@{/design}" th:object="${design}" id="designForm">
+        <div class="grid">
+            <div class="ingredient-group" id="wraps">
+                <h3>Please insert your wraps:</h3>
+                <div th:each="ingredient: ${wrap}">
+                    <input name="" type="checkbox" th:value="${}"/>
+                    <span th:text=""></span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
