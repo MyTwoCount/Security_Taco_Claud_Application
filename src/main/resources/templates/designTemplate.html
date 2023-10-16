@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Design Template Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/ctyles.css}"/>
+    <style>
+
+        body{
+            background-color:#307588;
+        }
+
+        div#container{
+            width:1000px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        div.grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+        }
+
+        div.ingredient-group{
+           margin-left:125px;
+        }
+
+        div#content{
+            text-align:center;
+        }
+
+        div.sendTaco{
+            margin:25px 0px 25px 0px;
+            width:1000px;
+        }
+
+        div.sendContainer{
+            text-align:center;
+            width:498px;
+            float:left;
+            font-weight:bold;
+        }
+
+        input{
+            background-color: #206578;
+            color:white;
+            border-radius:5px;
+            padding:5px 0px 5px 0px;
+        }
+
+        input[type='submit']{
+            background-color:#206578;
+            width:400px;
+            border-radius:5px;
+            color:blue;
+            font-weight:bold;
+            text-transform:uppercase;
+        }
+
+        h1{
+            text-shadow: 3px 2px 4px #60a5b8;
+            font-style:italic;
+            letter-spacing:1px;
+            word-spacing:3px;
+            text-transform:uppercase;
+            text-decoration:underline;
+        }
+
+    </style>
+</head>
+<body>
+
+        <div id="container">
+
+            <div id="content">
+                <img th:src="@{/images/TacoCloud.png}" alt="brak obrazka taco"/>
+                <h1>Design your own taco</h1>
+            </div>
+
+            <form method="post" th:action="@{/design}" th:object="${design}" id="designForm">
+                <div class="grid">
+                    <div class="ingredient-group" id="wraps">
+                        <h3>Please choose your wraps:</h3>
+                        <div th:each="ingredient: ${wrap}">
+                            <input name="ingredientList" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}"></span>
+                        </div>
+                    </div><br/>
+
+                    <div class="ingredient-group" id="proteins">
+                        <h3>Please choose your proteins:</h3>
+                        <div th:each="ingredient: ${protein}">
+                            <input name="ingredientList" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}"></span>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-group" id="veggies">
+                        <h3>Please choose your veggie:</h3>
+                        <div th:each="ingredient: ${veggies}">
+                            <input name="ingredientList" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}"></span>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-group" id="cheeses">
+                        <h3>Please choose your cheese:</h3>
+                        <div th:each="ingredient: ${cheese}">
+                            <input name="ingredientList" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}"></span>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-group" id="sauces">
+                        <h3>Please choose your sauce:</h3>
+                        <div th:each="ingredient: ${sauce}">
+                            <input name="ingredientList" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="sendTaco">
+
+                    <div class="sendContainer">
+                        <label for="taconame">Please insert name for your taco:</label>
+                        <input type="text" th:field="*{tacoName}" id="taconame" placeholder=" Insert taco name !"/>
+                    </div>
+
+                    <div class="sendContainer">
+                        <input type="submit" value="Order your choose"/>
+                    </div>
+
+                    <div style="clear:both"></div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+</body>
+</html>
