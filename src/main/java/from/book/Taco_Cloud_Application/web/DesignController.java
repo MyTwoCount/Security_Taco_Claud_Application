@@ -53,7 +53,7 @@ public class DesignController {
     @PostMapping
     public String postDesignTemplate(Taco design){
         log.info("Save object design using jpa method: "+design);
-        return "redirect:/";
+        return "redirect:/current/orders";
     }
 
     private List<Ingredient> filterByType(Ingredient.Type type, List<Ingredient> ingredients) {

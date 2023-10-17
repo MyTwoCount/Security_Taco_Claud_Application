@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Template</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        div#container{
+            //border:1px solid red;
+            width:800px;
+            margin-left:auto;
+            margin-right:auto;
+            text-align:center;
+            justify-content: center;
+        }
+        div#inputsAll{
+            float:left;
+            margin:0px 0px 0px 5px;
+        }
+        div#labelsAll{
+            float:left;
+        }
+        div.divs{
+            width:800px;
+            margin-left:auto:
+            margin-right:auto;
+            //border:2px solid yellow;
+        }
+        label{
+            border-bottom:1px solid grey;
+            display:block;
+            width:250px;
+            height:19px;
+            margin:0px 0px 3px 0px;
+        }
+        input{
+            width:200px;
+            margin:0px 0px 3px 0px;
+        }
+        div.center{
+            //border: 5px solid white;
+            margin: auto;
+            width: 60%;
+            padding: 10px 0px 0px 0px;
+        }
+        input[type='submit']{
+            color: #307588;
+            margin-top:30px;
+            width:350px;
+            height:50px;
+            font-size:24px;
+        }
+        .setUp{
+            padding: 4px 0px 4px 0px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+       <div class="divs">
+
+            <img th:src="@{/images/TacoCloud.png}"/>
+            <h1>Ordered your taco !</h1>
+
+            <form method="post" th:action="@{/current}" th:object="${order}">
+                <div class="center">
+                    <div id="labelsAll">
+                        <label class="setUp" for="deliveryName">Insert delivery name:</label>
+                        <label class="setUp" for="deliveryStreet">Insert delivery street:</label>
+                        <label class="setUp" for="deliveryCity">Insert delivery city:</label>
+                        <label class="setUp" for="deliveryState">Insert delivery state:</label>
+                        <label class="setUp" for="deliveryZip">Insert delivery zip:</label>
+                        <label class="setUp" for="ccNumber">Insert credit card number:</label>
+                        <label class="setUp" for="ccExpiration">Insert credit card expiration date:</label>
+                        <label class="setUp" for="ccCVV">Insert credit card CVV number:</label>
+                    </div>
+                    <div id="inputsAll">
+                        <input class="setUp" type="text" th:field="*{deliveryName}" id="deliveryName"/><br>
+                        <input class="setUp" type="text" th:field="*{deliveryStreet}" id="deliveryStreet"/><br>
+                        <input class="setUp" type="text" th:field="*{deliveryCity}" id="deliveryCity"/><br>
+                        <input class="setUp" type="text" th:field="*{deliveryState}" id="deliveryState"/><br>
+                        <input class="setUp" type="text" th:field="*{deliveryZip}" id="deliveryZip"/><br>
+                        <input class="setUp" type="text" th:field="*{ccNumber}" id="ccNumber"/><br>
+                        <input class="setUp" type="text" th:field="*{ccExpiration}" id="ccExpiration"/><br>
+                        <input class="setUp" type="text" th:field="*{ccCVV}" id="ccCVV"/><br>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+                <input type="submit" value="SubmitOrder" id="orderSubmitButton"/>
+
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/ctyles.css}"/>
     <style>
 
+        *{
+            margin:0px;
+            padding:0px;
+        }
+
         body{
             background-color:#307588;
         }
@@ -41,20 +46,36 @@
             font-weight:bold;
         }
 
-        input{
-            background-color: #206578;
-            color:white;
-            border-radius:5px;
-            padding:5px 0px 5px 0px;
+        input[type='submit']{
+            color: #307588;
+            margin-top:40px;
+            width:350px;
+            height:50px;
+            font-size:24px;
         }
 
-        input[type='submit']{
-            background-color:#206578;
-            width:400px;
+        div.sendTaco{
+            border:1px solid #303030;
+            padding-bottom:10px;
             border-radius:5px;
-            color:blue;
-            font-weight:bold;
-            text-transform:uppercase;
+        }
+
+        label[for='taconame']{
+            display:block;
+            height:30px;
+            padding-top:4px;
+            font-size:20px;
+        }
+
+        input[type='text']{
+            border:none;
+            color: #307588;
+            margin-top:5px;
+            width:350px;
+            height:50px;
+            font-size:24px;
+            border-radius:5px;
+            padding:0px;
         }
 
         h1{
@@ -64,6 +85,7 @@
             word-spacing:3px;
             text-transform:uppercase;
             text-decoration:underline;
+            margin-bottom:40px;
         }
 
     </style>
