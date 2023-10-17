@@ -88,6 +88,11 @@
             margin-bottom:40px;
         }
 
+        .validationError{
+            color:red;
+            text-align:center;
+        }
+
     </style>
 </head>
 <body>
@@ -100,6 +105,11 @@
             </div>
 
             <form method="post" th:action="@{/design}" th:object="${design}" id="designForm">
+
+                <div class="validationError" th:if="${#fields.hasErrors('ingredientList')}">
+                    <span th:errors="*{ingredientList}"></span>
+                </div>
+
                 <div class="grid">
                     <div class="ingredient-group" id="wraps">
                         <h3>Please choose your wraps:</h3>
@@ -144,6 +154,10 @@
                 </div>
 
                 <div class="sendTaco">
+
+                    <div class="validationError" th:if="${#fields.hasErrors('tacoName')}">
+                        <span th:errors="*{tacoName}"></span>
+                    </div>
 
                     <div class="sendContainer">
                         <label for="taconame">Please insert name for your taco:</label>

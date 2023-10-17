@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,10 +19,11 @@ public class Taco {
     private long id;
 
     @NotNull
-    @Min(value = 5,message = "Name for your taco must have at least five characters")
+    @Size(min = 5,message = "Name for your taco must have at least five characters")
     private String tacoName;
 
     @ManyToMany(targetEntity = Ingredient.class)
+    @Size(min = 1,message = "Ingredient list must have at least one ingredients")
     private List<Ingredient> ingredientList = new ArrayList<>();
 
     private Date createdAt;
