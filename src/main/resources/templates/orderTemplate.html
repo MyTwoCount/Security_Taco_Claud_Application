@@ -57,6 +57,11 @@
         .setUp{
             padding: 4px 0px 4px 0px;
         }
+
+        .validationError{
+            color:red;
+            font-size:14px;
+        }
     </style>
 </head>
 <body>
@@ -81,13 +86,21 @@
                         <label class="setUp" for="ccCVV">Insert credit card CVV number:</label>
                     </div>
                     <div id="inputsAll">
+                        <span class="validationError" th:if="${#fields.hasErrors('deliveryName')}" th:errors="*{deliveryName}"></span>
                         <input class="setUp" type="text" th:field="*{deliveryName}" id="deliveryName"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('deliveryStreet')}" th:errors="*{deliveryStreet}"></span>
                         <input class="setUp" type="text" th:field="*{deliveryStreet}" id="deliveryStreet"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('deliveryCity')}" th:errors="*{deliveryCity}"></span>
                         <input class="setUp" type="text" th:field="*{deliveryCity}" id="deliveryCity"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('deliveryState')}" th:errors="*{deliveryState}"></span>
                         <input class="setUp" type="text" th:field="*{deliveryState}" id="deliveryState"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('deliveryZip')}" th:errors="*{deliveryZip}"></span>
                         <input class="setUp" type="text" th:field="*{deliveryZip}" id="deliveryZip"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}"></span>
                         <input class="setUp" type="text" th:field="*{ccNumber}" id="ccNumber"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}"></span>
                         <input class="setUp" type="text" th:field="*{ccExpiration}" id="ccExpiration"/><br>
+                        <span class="validationError" th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}"></span>
                         <input class="setUp" type="text" th:field="*{ccCVV}" id="ccCVV"/><br>
                     </div>
                     <div style="clear:both"></div>

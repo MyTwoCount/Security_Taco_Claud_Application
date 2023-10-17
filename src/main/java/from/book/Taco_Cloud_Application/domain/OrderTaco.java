@@ -24,7 +24,7 @@ public class OrderTaco {
     private String deliveryStreet;
     @NotBlank(message = "deliveryCity cannot be blank")
     private String deliveryCity;
-    @NotBlank(message = "deliveryCity cannot be blank")
+    @NotBlank(message = "deliveryState cannot be blank")
     private String deliveryState;
     @NotBlank(message = "deliveryZip cannot be blank")
     private String deliveryZip;
