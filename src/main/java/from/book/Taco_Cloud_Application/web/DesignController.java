@@ -1,17 +1,16 @@
 package from.book.Taco_Cloud_Application.web;
 
 import from.book.Taco_Cloud_Application.data.IngredientRepository;
+import from.book.Taco_Cloud_Application.data.TacoRepository;
 import from.book.Taco_Cloud_Application.domain.Ingredient;
+import from.book.Taco_Cloud_Application.domain.OrderTaco;
 import from.book.Taco_Cloud_Application.domain.Taco;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -21,15 +20,18 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(path="/design")
 @Slf4j
+@SessionAttributes(names = {"orderTaco"})
 public class DesignController {
 
     private List<Ingredient> ingredients;
 
     private IngredientRepository ingredientRepo;
+    private TacoRepository tacoRepo;
 
     @Autowired
-    public DesignController(IngredientRepository ingredientRepo) {
+    public DesignController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
         this.ingredientRepo = ingredientRepo;
+        this.tacoRepo = tacoRepo;
     }
 
     @ModelAttribute
@@ -45,6 +47,8 @@ public class DesignController {
         }
 
         model.addAttribute("design", new Taco());
+        model.addAttribute("orderTaco",new OrderTaco());
+
         log.info("create taco object");
     }
 
@@ -54,11 +58,14 @@ public class DesignController {
     }
 
     @PostMapping
-    public String postDesignTemplate(@Valid @ModelAttribute(name = "design") Taco design, Errors errors){
+    public String postDesignTemplate(@Valid @ModelAttribute(name = "design") Taco design, Errors errors, OrderTaco orderTaco){
 
         if(errors.hasErrors()){
             return "designTemplate";
         }
+
+        Taco savedTaco = tacoRepo.save(design);
+        orderTaco.addTacoToOrder(savedTaco);
 
         log.info("Save object design using jpa method: "+design);
         return "redirect:/current/orders";

@@ -73,7 +73,7 @@
             <img th:src="@{/images/TacoCloud.png}"/>
             <h1>Ordered your taco !</h1>
 
-            <form method="post" th:action="@{/current}" th:object="${order}">
+            <form method="post" th:action="@{/current}" th:object="${orderTaco}">
                 <div class="center">
                     <div id="labelsAll">
                         <label class="setUp" for="deliveryName">Insert delivery name:</label>
