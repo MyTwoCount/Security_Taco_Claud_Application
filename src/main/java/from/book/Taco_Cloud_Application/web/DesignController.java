@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,13 @@ public class DesignController {
         this.tacoRepo = tacoRepo;
     }
 
+
+    @ModelAttribute(name = "orderTaco")
+    public OrderTaco order(){
+        OrderTaco orderTaco = new OrderTaco();
+        return orderTaco;
+    }
+
     @ModelAttribute
     public void prepareModel(Model model) {
         this.ingredients = new ArrayList<>();
@@ -47,7 +53,6 @@ public class DesignController {
         }
 
         model.addAttribute("design", new Taco());
-        model.addAttribute("orderTaco",new OrderTaco());
 
         log.info("create taco object");
     }
