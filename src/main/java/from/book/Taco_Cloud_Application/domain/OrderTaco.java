@@ -3,6 +3,7 @@ package from.book.Taco_Cloud_Application.domain;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class OrderTaco {
     private String ccNumber;
     @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",message="Must be formatted MM/YY")
     private String ccExpiration;
-    @NotBlank(message = "ccCVV cannot be blank")
+    @Digits(integer = 3,fraction = 0,message = "Please insert correct CVV Number")
     private String ccCVV;
 
     private Date placeAt;

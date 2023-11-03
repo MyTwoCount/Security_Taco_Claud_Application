@@ -40,28 +40,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @ExtendWith(SpringExtension.class)
-//@RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(controllers = {DesignController.class})
-//@WebAppConfiguration
-//@ContextConfiguration(classes = {IngredientRepository.class, TacoRepository.class})
-@ContextConfiguration(classes = {DesignController.class,CurrentContextOfApplication.class,IngredientMockProvider.class, TacoMockProvider.class})
 public class designTacoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    //@Autowired
-    //private CurrentContextOfApplication currentContextOfApplication;
-
-    /*@MockBean
-    private IngredientRepository ingredientRepositoryMock;
+    @MockBean
+    private IngredientRepository ingredientRepository;
 
     @MockBean
-    private TacoRepository tacoRepositoryMock;*/
+    private TacoRepository tacoRepository;
 
     private List<Ingredient> ingredientList;
 
-    @BeforeEach //@BeforeAll
+    @BeforeEach
     public void prepareTest(){
         ingredientList = Arrays.asList(
             new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
@@ -76,14 +69,11 @@ public class designTacoControllerTest {
             new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
 
-        Mockito.when(CurrentContextOfApplication.getCurrentContextOfApplication().getBean(IngredientMockProvider.class).ingredientRepository().findAll()).thenReturn(ingredientList);
+        Mockito.when(ingredientRepository.findAll()).thenReturn(ingredientList);
     }
 
     @Test
     public void getDesignTest() throws Exception {
-        /*mockMvc.perform(get("/design"))
-                //.andExpect(status().isOk());
-                .andExpect(view().name("designTemplate"));*/
 
         mockMvc.perform(MockMvcRequestBuilders.get("/design").accept(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
@@ -95,53 +85,5 @@ public class designTacoControllerTest {
                 .andExpect(model().attribute("sauce",ingredientList.subList(8,10)));
 
     }
-
-    @Test
-    public void testOfIngredientBeainInContextOfApplication(){
-        ApplicationContext context = CurrentContextOfApplication.getCurrentContextOfApplication();
-        Assertions.assertNotNull(context);
-        IngredientMockProvider ingredientMockProvider = context.getBean(IngredientMockProvider.class);
-        Assertions.assertNotNull(ingredientMockProvider);
-        Assertions.assertNotNull(ingredientMockProvider.ingredientRepository());
-        Assertions.assertNotNull(ingredientMockProvider.ingredientRepository().findAll());
-        System.out.println("ingList = "+ingredientMockProvider.ingredientRepository().findAll());
-
-        ingredientMockProvider.ingredientRepository().findAll().forEach((x)->{
-            System.out.println("x = "+x);
-        });
-    }
 }
 
-@Configuration
-class IngredientMockProvider{
-
-    @Bean
-    public IngredientRepository ingredientRepository(){
-        return Mockito.mock(IngredientRepository.class);
-    }
-}
-
-@Configuration
-class TacoMockProvider{
-
-    @Bean
-    public TacoRepository tacoRepository(){
-        return Mockito.mock(TacoRepository.class);
-    }
-
-}
-
-@Component
-class CurrentContextOfApplication implements ApplicationContextAware {
-
-    private static ApplicationContext applicationContext;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-
-    public static ApplicationContext getCurrentContextOfApplication(){
-        return applicationContext;
-    }
-}
